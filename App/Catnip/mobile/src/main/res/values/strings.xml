@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Represent!</string>
+    <string name="google_app_id">represent-1237</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="load_candidate">loadcandidatekey</string>
+    <string name="committee_filler">Committee of something\n\nCommittee of other thing\n\nCommittee of third thing\n\nCommittee of more things</string>
+    <string name="bill_filler">"01/01/2001: Bill of Random Issue\n\n01/01/2001: Bill of Random Issue\n\n01/01/2001: Bill of Random Issue\n\n01/01/2001: Bill of Random Issue\n\n01/01/2001: Bill of Random Issue"</string>
+</resources>

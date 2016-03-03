@@ -1,0 +1,98 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="315dp"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="0dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/candidateImageView"
+            android:src="@drawable/samplerep"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="centerInside"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="More"
+            android:id="@+id/moreButton"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/candidateImageView"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/websiteButton"
+            android:layout_below="@+id/partyTextView"
+            android:layout_toRightOf="@+id/emailButton"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/ic_public_24dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailButton"
+            android:layout_below="@+id/partyTextView"
+            android:layout_alignStart="@+id/nameTextView"
+            android:src="@drawable/ic_email_24dp"/>
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Candidate"
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/candidateImageView"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/partyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Party"
+            android:layout_below="@+id/nameTextView"
+            android:textSize="16sp"
+            android:layout_alignStart="@+id/nameTextView"/>
+
+        <TextView
+            android:id="@+id/tweetTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tweet tweet"
+            android:layout_below="@+id/websiteButton"
+            android:layout_marginRight="10dp"
+            android:layout_alignStart="@+id/nameTextView"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:id="@+id/tweetImageView"
+            android:layout_below="@+id/websiteButton"
+            android:layout_marginTop="12dp"
+            android:layout_toLeftOf="@+id/tweetTextView"
+            android:layout_marginRight="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/tweet"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pageTextView"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
