@@ -1,14 +1,14 @@
 # PROG 02: Represent!
 
-Briefly describe your app here.
+Shows local representatives and more!
 
 ## Authors
 
-FirstName LastName ([your_email@berkeley.edu](mailto:your_email@berkeley.edu))
+Richard Hu([rhu@berkeley.edu](mailto:rhu@berkeley.edu))
 
 ## Demo Video
 
-See [your demo video title here] (https://link_to_your_video)
+See Prog2-B Demo(https://www.youtube.com/watch?v=oiBQuuM-BVY)
 
 ## Screenshots
 
@@ -16,5 +16,5 @@ See [your demo video title here] (https://link_to_your_video)
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Any other support
+* Stack Overflow for a lot of inspiration as well as the algorithm for shake detection/accelerometer readings
+* Fellow students for the knowledge of the in-built back button
