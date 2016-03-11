@@ -2,28 +2,51 @@ package com.cs160.joleary.catnip;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
-public class MainActivity extends Activity {
-    //there's not much interesting happening. when the buttons are pressed, they start
-    //the PhoneToWatchService with the cat name passed in.
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderApi;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
+import java.io.IOException;
+import java.util.Locale;
+
+public class MainActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private Button zipCodeButton;
     private Button currentLocButton;
+    private GoogleApiClient mGoogleApiClient;
+    private Location currentLoc;
+    private Address localInfo;
+    private Geocoder geocoder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+        mGoogleApiClient.connect();
+
+        geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         zipCodeButton = (Button) findViewById(R.id.zipCodeButton);
         currentLocButton = (Button) findViewById(R.id.currentLocButton);
-
         zipCodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,53 +58,90 @@ public class MainActivity extends Activity {
         currentLocButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    currentLoc = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                    if (currentLoc == null) {
+                        Log.d("T", "Received null location");
+                        System.exit(0);
+                    }
+                    localInfo = geocoder.getFromLocation(currentLoc.getLatitude(), currentLoc.getLongitude(), 1).get(0);
+                } catch (IOException i) {
+                    Log.d("T", "Failed to get current location");
+                    System.exit(0);
+                } catch (SecurityException i) {
+                    Log.d("T", "Insufficient permissions");
+                    System.exit(0);
+                }
                 Intent infoIntent = new Intent(getBaseContext(), InfoPanel.class);
-                InfoPanel.zipLoad = 94709; //Current location fixed at 94709
+                InfoPanel.zipLoad = Integer.parseInt(localInfo.getPostalCode());
                 startActivity(infoIntent);
             }
         });
-
-        /*
-        mFredButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent sendIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-                sendIntent.putExtra("CAT_NAME", "Fred");
-                startService(sendIntent);
-            }
-        });
-
-        mLexyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent sendIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-                sendIntent.putExtra("CAT_NAME", "Lexy");
-                startService(sendIntent);
-            }
-        });*/
-
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.settings:
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.d("T", "Api Client is suspended!");
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.d("T", "Api Client is connected!");
+        try {
+            LocationRequest locationRequest = LocationRequest.create();
+            LocationListener locationListener = new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    currentLoc = location;
+                    Log.d("T", "Location updated");
+                }
+            };
+            try {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, locationListener);
+            } catch (SecurityException s) {
+                Log.d("T", "Failed to request location updates. Insufficient permissions.");
+                System.exit(0);
+            }
+            Log.d("T", "Successfully requested location updates");
+        } catch (SecurityException s) {
+            Log.d("T", "Insufficient permissions");
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.d("T", "Api Client failed to connect!");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mGoogleApiClient.disconnect();
     }
 }

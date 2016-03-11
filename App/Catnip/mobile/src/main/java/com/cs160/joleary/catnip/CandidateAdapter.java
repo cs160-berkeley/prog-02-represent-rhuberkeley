@@ -67,7 +67,7 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.Cust
         holder.websiteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri webpage = Uri.parse("http://www." + candidate.website);
+                Uri webpage = Uri.parse(candidate.website);
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
                 webIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(webIntent);
@@ -78,8 +78,8 @@ public class CandidateAdapter extends RecyclerView.Adapter<CandidateAdapter.Cust
             @Override
             public void onClick(View view) {
                 Intent moreIntent = new Intent(context, DetailedPanel.class);
+                DetailedPanel.candidate = candidate;
                 moreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                moreIntent.putExtra(CANDIDATE_KEY, candidate.name);
                 context.startActivity(moreIntent);
             }
         });

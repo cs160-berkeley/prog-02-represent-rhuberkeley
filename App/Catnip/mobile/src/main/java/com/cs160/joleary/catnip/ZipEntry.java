@@ -39,8 +39,8 @@ public class ZipEntry extends Activity {
             @Override
             public void onClick(View v) {
                 if (Pattern.matches("[0-9]+", zipCodeEditText.getText()) && (zipCodeEditText.getText().length() == 5)) {
+                    InfoPanel.zipLoad = Integer.parseInt(zipCodeEditText.getText().toString());
                     Intent infoIntent = new Intent(getBaseContext(), InfoPanel.class);
-                    infoIntent.putExtra(ZIPCODE_KEY, Integer.parseInt(zipCodeEditText.getText().toString()));
                     startActivity(infoIntent);
                 } else {
                     Toast.makeText(ZipEntry.this, "Invalid zip code entered.", Toast.LENGTH_SHORT).show();

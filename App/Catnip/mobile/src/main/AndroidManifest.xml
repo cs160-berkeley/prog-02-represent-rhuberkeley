@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cs160.joleary.catnip">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,7 +31,8 @@
         </service>
 
         <activity android:name=".ZipEntry" />
-        <activity android:name=".InfoPanel" />
+        <activity android:name=".InfoPanel"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".DetailedPanel"
             android:parentActivityName=".InfoPanel">
@@ -36,6 +40,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cs160.joleary.catnip.MainActivity"></meta-data>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDNBLlh0fhKnppqVVPOphiuqLNTw-FOMMw"/>
     </application>
 
 </manifest>
