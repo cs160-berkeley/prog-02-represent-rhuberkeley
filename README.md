@@ -8,7 +8,7 @@ Richard Hu([rhu@berkeley.edu](mailto:rhu@berkeley.edu))
 
 ## Demo Video
 
-See Prog2-B Demo(https://www.youtube.com/watch?v=oiBQuuM-BVY)
+See Prog2-C Demo(https://youtu.be/0uPxQh9irno)
 
 ## Screenshots
 
