@@ -12,15 +12,15 @@ public class Candidate {
     public String tweet;
     public String bioguideID;
     public String termEnd;
-    public int imageId;
+    public String imageURL;
 
-    public Candidate(String name, String party, String email, String website, String tweet, String termEnd, String bioID, int imageId) {
+    public Candidate(String name, String party, String email, String website, String tweet, String termEnd, String bioID, String imageURL) {
         this.name = name;
         this.party = party;
         this.email = email;
         this.website = website;
         this.tweet = tweet;
-        this.imageId = imageId;
+        this.imageURL = imageURL;
         this.bioguideID = bioID;
         this.termEnd = termEnd;
     }

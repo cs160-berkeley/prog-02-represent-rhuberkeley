@@ -30,7 +30,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ZipEntry" />
+        <activity android:name=".ZipEntry"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".InfoPanel"
             android:parentActivityName=".MainActivity"/>
         <activity
@@ -43,6 +44,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDNBLlh0fhKnppqVVPOphiuqLNTw-FOMMw"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="635fe5f52ac9e346aa838a510eddf5ffff150be5" />
     </application>
 
 </manifest>

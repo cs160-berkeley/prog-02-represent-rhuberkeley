@@ -11,14 +11,15 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
             android:id="@+id/candidateImageView"
-            android:src="@drawable/samplerep"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:scaleType="centerInside"
-            android:layout_marginTop="10dp"/>
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/loadingicon"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -94,7 +95,7 @@
             android:text="Candidate"
             android:textSize="18sp"
             android:layout_toRightOf="@+id/candidateImageView"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="20dp"/>
 
         <TextView
@@ -106,25 +107,34 @@
             android:textSize="16sp"
             android:layout_alignStart="@+id/nameTextView"/>
 
-        <TextView
-            android:id="@+id/tweetTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tweet tweet"
+        <ScrollView
+            android:layout_width="260dp"
+            android:layout_height="85dp"
+            android:id="@+id/scrollView"
             android:layout_below="@+id/linearLayout"
             android:layout_marginRight="10dp"
-            android:layout_alignStart="@+id/nameTextView"/>
+            android:layout_alignStart="@+id/nameTextView">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tweetTextView"
+                    android:padding="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="      Loading tweet..."/>
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:id="@+id/tweetImageView"
-            android:layout_below="@+id/linearLayout"
-            android:layout_marginTop="12dp"
-            android:layout_toLeftOf="@+id/tweetTextView"
-            android:layout_marginRight="5dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/tweet"/>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:id="@+id/tweetImageView"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@+id/tweetTextView"
+                    android:layout_marginRight="-20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/tweet"/>
+            </RelativeLayout>
+        </ScrollView>
 
         <TextView
             android:layout_width="wrap_content"

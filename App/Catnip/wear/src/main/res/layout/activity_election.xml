@@ -37,9 +37,9 @@
         android:textSize="14sp"/>
 
     <TextView
-        android:layout_width="30dp"
+        android:layout_width="38dp"
         android:layout_height="wrap_content"
-        android:text="18%"
+        android:text="00.0%"
         android:id="@+id/repVoteTextView"
         android:layout_below="@+id/countyTextView"
         android:layout_alignParentStart="true"
@@ -49,9 +49,9 @@
         android:textColor="@color/red"/>
 
     <TextView
-        android:layout_width="30dp"
+        android:layout_width="38dp"
         android:layout_height="wrap_content"
-        android:text="79%"
+        android:text="00.0%"
         android:id="@+id/demVoteTextView"
         android:layout_alignTop="@+id/repVoteTextView"
         android:layout_alignParentEnd="true"
@@ -59,24 +59,22 @@
         android:textColor="@color/blue"/>
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:id="@+id/elephantImageView"
         android:layout_below="@+id/countyTextView"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/repVoteTextView"
         android:src="@drawable/elephant"/>
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:scaleType="centerInside"
         android:id="@+id/donkeyImageView"
         android:layout_below="@+id/countyTextView"
         android:layout_toStartOf="@+id/demVoteTextView"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
         android:src="@drawable/donkey"/>
 
     <TextView
@@ -86,7 +84,7 @@
         android:id="@+id/repNameTextView"
         android:layout_below="@+id/elephantImageView"
         android:layout_toEndOf="@+id/repVoteTextView"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
         android:textColor="@color/red"/>
 
     <TextView

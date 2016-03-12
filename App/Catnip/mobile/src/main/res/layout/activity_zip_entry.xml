@@ -12,7 +12,7 @@
         android:src="@drawable/replogo"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_below="@+id/logoImageView"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
@@ -43,15 +43,5 @@
         android:id="@+id/submitButton"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/zipCodeEditText"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/backButton"
-        android:layout_marginTop="20dp"
-        android:layout_alignStart="@+id/submitButton"
-        android:layout_alignEnd="@+id/submitButton"
-        android:layout_below="@+id/submitButton" />
 
 </RelativeLayout>

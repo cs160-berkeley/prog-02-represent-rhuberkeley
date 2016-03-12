@@ -16,11 +16,15 @@ import java.net.URL;
 /**
  * Created by Richard on 3/9/2016.
  */
-class RetrieveFeedTask extends AsyncTask<Integer, Void, String> {
-    protected String doInBackground(Integer... zipLoad) {
+class RetrieveFeedTask extends AsyncTask<Integer, Void, JSONObject> {
+    protected JSONObject doInBackground(Integer... zipLoad) {
         try {
             String sunlightURL = "https://congress.api.sunlightfoundation.com/legislators/locate?zip=";
-            sunlightURL = sunlightURL.concat(Integer.toString(zipLoad[0]));
+            String zipString = Integer.toString(zipLoad[0]);
+            while (zipString.length() < 5) {
+                zipString = "0".concat(zipString);
+            }
+            sunlightURL = sunlightURL.concat(zipString);
             sunlightURL = sunlightURL.concat("&apikey=3ec8c0acbf6040cba45b07ce05792cb4");
             URL url = new URL(sunlightURL);
             InputStream in = url.openStream();
@@ -30,16 +34,15 @@ class RetrieveFeedTask extends AsyncTask<Integer, Void, String> {
             while ((jsonPart = streamReader.readLine()) != null) {
                 jsonBuilder.append(jsonPart);
             }
-            String res = jsonBuilder.toString();
-            Log.d("T", "Received JSON data " + res);
-            InfoPanel.received = true;
-            InfoPanel.results = res;
-            return res;
+            Log.d("T", "Received JSON data " + jsonBuilder.toString());
+            return new JSONObject(jsonBuilder.toString());
         } catch (MalformedURLException m) {
             Log.d("T", "URL was malformed");
         } catch (IOException i) {
             Log.d("T", i.getMessage());
             Log.d("T", "I/O failure");
+        } catch (JSONException j) {
+            Log.d("T", "JSON failure");
         }
         Log.d("T", "Returning null JSON");
         return null;

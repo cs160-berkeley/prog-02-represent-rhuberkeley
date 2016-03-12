@@ -15,7 +15,6 @@ public class ZipEntry extends Activity {
     public static final String ZIPCODE_KEY = "zipcode";
 
     private Button submitButton;
-    private Button backButton;
     private EditText zipCodeEditText;
 
     @Override
@@ -23,17 +22,10 @@ public class ZipEntry extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zip_entry);
 
-        submitButton = (Button) findViewById(R.id.submitButton);
-        backButton = (Button) findViewById(R.id.backButton);
-        zipCodeEditText = (EditText) findViewById(R.id.zipCodeEditText);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeIntent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(homeIntent);
-            }
-        });
+        submitButton = (Button) findViewById(R.id.submitButton);
+        zipCodeEditText = (EditText) findViewById(R.id.zipCodeEditText);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override

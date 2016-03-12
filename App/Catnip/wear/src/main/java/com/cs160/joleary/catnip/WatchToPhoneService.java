@@ -21,6 +21,8 @@ public class WatchToPhoneService extends Service {
 
     private static final String LOAD_CANDIDATE = "/load_candidate";
     private static final String LOAD_ZIP = "/load_zip";
+    private static final String LOAD_COUNTY = "/load_county";
+
 
     private GoogleApiClient mApiClient;
 
@@ -63,15 +65,19 @@ public class WatchToPhoneService extends Service {
                 mApiClient.connect();
                 String name = extras.getString(WatchCandidateAdapter.WATCH_NAME_KEY);
                 int zip = extras.getInt(ElectionActivity.ZIPCODE_TO_PHONE_KEY);
+                String county = extras.getString(ElectionActivity.COUNTY_TO_PHONE_KEY);
                 if (name != null) {
+                    Log.d("T", "Sending name to watch with: " + name);
                     sendMessage(LOAD_CANDIDATE, name);
+                } else if (county != null) {
+                    Log.d("T", "Sending county to watch with: " + county);
+                    sendMessage(LOAD_COUNTY, county);
                 } else if (zip != 0) {
+                    Log.d("T", "Sending zip to watch with: " + Integer.toString(zip));
                     sendMessage(LOAD_ZIP, Integer.toString(zip));
                 }
             }
         }).start();
-        Log.d("T", "Sending message to watch with: " + extras.getString(WatchCandidateAdapter.WATCH_NAME_KEY));
-
         return START_STICKY;
     }
 

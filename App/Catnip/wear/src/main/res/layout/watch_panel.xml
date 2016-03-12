@@ -2,7 +2,6 @@
 <android.support.wearable.view.BoxInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/banner"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
@@ -12,24 +11,26 @@
         android:layout_height="match_parent"
         app:layout_box="bottom">
 
+
         <android.support.wearable.view.CardFrame
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
             xmlns:android="http://schemas.android.com/apk/res/android">
 
             <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="5dp">
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:fontFamily="sans-serif-light"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:text="Yelloooo"
                     android:textColor="@color/black"
-                    android:textSize="14sp"/>
+                    android:textSize="16sp"
+                    android:id="@+id/titleTextView"/>
 
                 <TextView
                     android:fontFamily="sans-serif-light"
@@ -37,7 +38,8 @@
                     android:layout_width="match_parent"
                     android:text="Greetings"
                     android:textColor="@color/black"
-                    android:textSize="14sp"/>
+                    android:textSize="12sp"
+                    android:id="@+id/descriptionTextView"/>
 
             </LinearLayout>
         </android.support.wearable.view.CardFrame>

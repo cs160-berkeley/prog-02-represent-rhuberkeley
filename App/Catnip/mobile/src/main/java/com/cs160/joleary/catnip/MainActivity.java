@@ -19,10 +19,18 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
 import java.util.Locale;
 
 public class MainActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "ikL3IlLrW4YVVtxOLJpyXj3T9";
+    private static final String TWITTER_SECRET = "Bn3oaTMxdpp4KVZuXQyJcITOKUB3sT7WK9i9F9Ep5mENehLQ1x";
+
     private Button zipCodeButton;
     private Button currentLocButton;
     private GoogleApiClient mGoogleApiClient;
@@ -33,6 +41,8 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_main);
 
         if (mGoogleApiClient == null) {

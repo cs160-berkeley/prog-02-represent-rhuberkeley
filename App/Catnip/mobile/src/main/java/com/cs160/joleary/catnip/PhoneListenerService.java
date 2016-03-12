@@ -21,6 +21,7 @@ public class PhoneListenerService extends WearableListenerService {
 //   WearableListenerServices don't need an iBinder or an onStartCommand: they just need an onMessageReceieved.
     private static final String LOAD_CANDIDATE = "/load_candidate";
     private static final String LOAD_ZIP = "/load_zip";
+    private static final String LOAD_COUNTY = "/load_county";
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -49,6 +50,22 @@ public class PhoneListenerService extends WearableListenerService {
 
             Intent infoIntent = new Intent(getApplicationContext(), InfoPanel.class);
             infoIntent.putExtra(ZipEntry.ZIPCODE_KEY, Integer.parseInt(value));
+            infoIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(infoIntent);
+
+            // so you may notice this crashes the phone because it's
+            //''sending message to a Handler on a dead thread''... that's okay. but don't do this.
+            // replace sending a toast with, like, starting a new activity or something.
+            // who said skeleton code is untouchable? #breakCSconceptions
+
+        } else if ( messageEvent.getPath().equalsIgnoreCase(LOAD_COUNTY) ) {
+
+            // Value contains the String we sent over in WatchToPhoneService
+            String value = new String(messageEvent.getData(), StandardCharsets.UTF_8);
+            Log.d("T", "Received message from watch to start info panel view with: " + value);
+
+            Intent infoIntent = new Intent(getApplicationContext(), InfoPanel.class);
+            infoIntent.putExtra(InfoPanel.COUNTY_KEY, value);
             infoIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(infoIntent);
 

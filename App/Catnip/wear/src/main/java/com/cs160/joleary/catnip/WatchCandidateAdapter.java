@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.FragmentGridPagerAdapter;
 import android.util.Log;
@@ -16,6 +17,8 @@ import java.util.Arrays;
 public class WatchCandidateAdapter extends FragmentGridPagerAdapter {
 
     public final static String WATCH_NAME_KEY = "watchnamekey";
+    public final static String WATCH_DESC_KEY = "watchdesckey";
+
 
     private final Context context;
     private final FragmentManager fm;
@@ -33,14 +36,9 @@ public class WatchCandidateAdapter extends FragmentGridPagerAdapter {
     }
 
     public final Page[][] PAGES = {{}};
-    public int zipCode;
 
     @Override
     public Fragment getFragment(int row, int col) {
-        if (col == MainActivity.spacing) {
-            CardFragment fragment = CardFragment.create(Integer.toString(MainActivity.zipCode), "2012\nElection View");
-            return fragment;
-        }
         Page page = PAGES[row][col];
         String title = page.title;
         String name = page.name;
@@ -56,7 +54,12 @@ public class WatchCandidateAdapter extends FragmentGridPagerAdapter {
             party = "None";
         }
 
-        CardFragment fragment = CardFragment.create(name, party + "\n" + title);
+        CandidateFragment fragment = new CandidateFragment();
+        Bundle args = new Bundle();
+        args.putString(WATCH_NAME_KEY, name);
+        args.putString(WATCH_DESC_KEY, party + "\n" + title);
+        fragment.setArguments(args);
+        fragment.setContext(context);
         return fragment;
     }
 

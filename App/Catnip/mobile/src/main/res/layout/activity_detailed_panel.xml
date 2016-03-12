@@ -10,11 +10,14 @@
     tools:context="com.cs160.joleary.catnip.DetailedPanel">
 
     <TextView
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
         android:text="Name"
-        android:id="@+id/nameTextView"/>
+        android:id="@+id/nameTextView"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"/>
 
     <ImageView
         android:layout_width="150dp"
@@ -22,15 +25,14 @@
         android:scaleType="centerCrop"
         android:id="@+id/portraitImageView"
         android:layout_below="@+id/nameTextView"
-        android:layout_alignStart="@+id/nameTextView"
-        android:src="@drawable/samplerep"/>
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Party"
         android:id="@+id/partyTextView"
-        android:layout_alignStart="@+id/nameTextView"
+        android:layout_alignStart="@+id/portraitImageView"
         android:layout_below="@+id/portraitImageView"
         android:layout_alignEnd="@+id/termTextView"
         android:textSize="18sp"
@@ -41,7 +43,7 @@
         android:layout_height="wrap_content"
         android:text="Term Ends"
         android:id="@+id/termTextView"
-        android:layout_alignStart="@+id/nameTextView"
+        android:layout_alignStart="@+id/portraitImageView"
         android:layout_below="@+id/partyTextView"
         android:layout_alignEnd="@+id/portraitImageView"
         android:textSize="14sp"
@@ -52,14 +54,14 @@
         android:layout_height="wrap_content"
         android:text="Committees"
         android:id="@+id/clabelTextView"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:textSize="20sp"
+        android:layout_below="@+id/nameTextView"
         android:layout_toRightOf="@+id/portraitImageView"/>
 
     <ScrollView
         android:layout_width="150dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_below="@id/clabelTextView"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/portraitImageView">
@@ -80,13 +82,12 @@
         android:id="@+id/blabelTextView"
         android:layout_below="@+id/termTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:textSize="20sp"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/blabelTextView"
         android:textAlignment="viewStart"
         android:layout_alignParentLeft="true">

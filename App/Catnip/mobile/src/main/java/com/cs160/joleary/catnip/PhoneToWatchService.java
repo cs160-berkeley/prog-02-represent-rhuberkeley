@@ -47,39 +47,38 @@ public class PhoneToWatchService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Which cat do we want to feed? Grab this info from INTENT
-        // which was passed over when we called startService
-        final Bundle extras = intent.getExtras();
-        // final String catName = extras.getString("CAT_NAME");
-
-        // Send the message with the cat name
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //first, connect to the apiclient
-                mApiClient.connect();
-                //now that you're connected, send a massage with the cat name
-                String message = "";
-                ArrayList<String> iterate = extras.getStringArrayList(InfoPanel.CAND_NAMES_KEY);
-                for (String str : iterate) {
-                    message = message + str + "/";
-                }
-                iterate = extras.getStringArrayList(InfoPanel.CAND_PARTIES_KEY);
-                for (String str : iterate) {
-                    message = message + str + "/";
-                }
-
-                String message3 = "";
-                iterate = extras.getStringArrayList(InfoPanel.CAND_TITLES_KEY);
-                for (String str : iterate) {
-                    message = message + str + "/";
-                }
-                message = message + Integer.toString(extras.getInt(InfoPanel.ZIP_KEY));
-                sendMessage(InfoPanel.CAND_INFO_KEY, message);
+        if (intent != null) {
+            final Bundle extras = intent.getExtras();
+            if (extras == null) {
+                Log.d("T", "Received null extras from phone to watch");
+                getApplicationContext().stopService(intent);
             }
-        }).start();
 
-        return START_STICKY;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mApiClient.connect();
+                    String message = "";
+                    ArrayList<String> iterate = extras.getStringArrayList(InfoPanel.CAND_NAMES_KEY);
+                    for (String str : iterate) {
+                        message = message + str + "/";
+                    }
+                    iterate = extras.getStringArrayList(InfoPanel.CAND_PARTIES_KEY);
+                    for (String str : iterate) {
+                        message = message + str + "/";
+                    }
+                    iterate = extras.getStringArrayList(InfoPanel.CAND_TITLES_KEY);
+                    for (String str : iterate) {
+                        message = message + str + "/";
+                    }
+                    message = message + Integer.toString(extras.getInt(InfoPanel.ZIP_KEY)) + "/";
+                    message = message + extras.getString(InfoPanel.COUNTY_KEY);
+                    sendMessage(InfoPanel.CAND_INFO_KEY, message);
+                }
+            }).start();
+            return START_STICKY;
+        }
+        return -1;
     }
 
     @Override //remember, all services need to implement an IBiner
@@ -88,8 +87,6 @@ public class PhoneToWatchService extends Service {
     }
 
     private void sendMessage( final String path, final String text ) {
-        //one way to send message: start a new thread and call .await()
-        //see watchtophoneservice for another way to send a message
         new Thread( new Runnable() {
             @Override
             public void run() {
